@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLM Afvalscheiding – Complete Website</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #003082;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg') center/cover;
+            padding: 120px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .subhero {
+            background-color: #003082;
+            padding: 60px;
+            text-align: center;
+            color: white;
+        }
+
+        .btn {
+            background: #00A1DE;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .blue { border-left: 8px solid #00A1DE; }
+        .yellow { border-left: 8px solid #FFD500; }
+        .green { border-left: 8px solid #009E60; }
+        .red { border-left: 8px solid #D00000; }
+
+        .exercise {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        .items, .bins {
+            width: 45%;
+        }
+
+        .draggable {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            cursor: grab;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .bin {
+            background: #e8e8e8;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 6px;
+            min-height: 80px;
+        }
+
+        footer {
+            background-color: #003082;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        section {
+            padding: 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home">
+<header class="hero">
+    <h1>Afvalscheiding voor KLM‑Monteurs</h1>
+    <p>In 5 minuten weet jij precies wat waar hoort.</p>
+    <a class="btn" href="#waarom">Start de cursus</a>
+</header>
+
+<section>
+    <h2>Wat ga je leren?</h2>
+    <div class="grid">
+        <div class="card"><h3>Waarom afval scheiden?</h3></div>
+        <div class="card"><h3>De bakken</h3></div>
+        <div class="card"><h3>Oefenen</h3></div>
+    </div>
+</section>
+</div>
+
+<!-- WAAROM -->
+<div id="waarom">
+<header class="subhero">
+    <h1>Waarom afval scheiden?</h1>
+</header>
+
+<section>
+    <div class="grid">
+        <div class="card"><h3>🌍 Milieu</h3><p>We verminderen afval.</p></div>
+        <div class="card"><h3>💰 Kosten</h3><p>We besparen geld.</p></div>
+        <div class="card"><h3>🦺 Veiligheid</h3><p>We voorkomen gevaar.</p></div>
+    </div>
+
+    <a class="btn" href="#bakken">Volgende stap → De bakken</a>
+</section>
+</div>
+
+<!-- BAKKEN -->
+<div id="bakken">
+<header class="subhero">
+    <h1>De Afvalbakken</h1>
+</header>
+
+<section>
+    <div class="grid">
+        <div class="card blue"><h3>Blauw</h3><p>Papier</p></div>
+        <div class="card yellow"><h3>Geel</h3><p>Plastic</p></div>
+        <div class="card green"><h3>Groen</h3><p>Organisch</p></div>
+        <div class="card red"><h3>Rood</h3><p>Gevaarlijk</p></div>
+    </div>
+
+    <a class="btn" href="#oefenen">Oefenen →</a>
+</section>
+</div>
+
+<!-- OEFENING -->
+<div id="oefenen">
+<header class="subhero">
+    <h1>Sleep het afval naar de juiste bak</h1>
+</header>
+
+<section class="exercise">
+    <div class="items">
+        <div class="draggable" draggable="true" data-type="papier">📄 Papier</div>
+        <div class="draggable" draggable="true" data-type="plastic">🥤 Plastic beker</div>
+        <div class="draggable" draggable="true" data-type="organisch">🍎 Appelklokhuis</div>
+        <div class="draggable" draggable="true" data-type="gevaarlijk">🛢️ Olie</div>
+    </div>
+
+    <div class="bins">
+        <div class="bin blue" data-accept="papier">Blauw – Papier</div>
+        <div class="bin yellow" data-accept="plastic">Geel – Plastic</div>
+        <div class="bin green" data-accept="organisch">Groen – Organisch</div>
+        <div class="bin red" data-accept="gevaarlijk">Rood – Gevaarlijk</div>
+    </div>
+</section>
+
+<a class="btn" href="#test">Ga naar de eindtest →</a>
+</div>
+
+<!-- TEST -->
+<div id="test">
+<header class="subhero">
+    <h1>Eindtest</h1>
+</header>
+
+<section>
+    <h2>Mini‑quiz</h2>
+
+    <p>Waar hoort een lege plastic fles?</p>
+    <button onclick="alert('Goed!')">Gele bak</button>
+    <button onclick="alert('Fout!')">Blauwe bak</button>
+
+    <br><br>
+
+    <a class="btn" href="#bedankt">Afronden →</a>
+</section>
+</div>
+
+<!-- BEDANKT -->
+<div id="bedankt">
+<header class="subhero">
+    <h1>Bedankt voor het volgen van de cursus!</h1>
+</header>
+
+<section>
+    <p>Je hebt de basis van afvalscheiding onder de knie.</p>
+    <p>Vanaf vandaag scheiden we het samen goed.</p>
+
+    <a class="btn" href="#home">Terug naar home</a>
+</section>
+</div>
+
+<footer>© 2026 KLM Afvalscheiding – Prototype</footer>
+
+<script>
+const draggables = document.querySelectorAll('.draggable');
+const bins = document.querySelectorAll('.bin');
+
+draggables.forEach(item => {
+    item.addEventListener('dragstart', () => item.classList.add('dragging'));
+    item.addEventListener('dragend', () => item.classList.remove('dragging'));
+});
+
+bins.forEach(bin => {
+    bin.addEventListener('dragover', e => {
+        e.preventDefault();
+        const dragging = document.querySelector('.dragging');
+        bin.style.background = dragging && dragging.dataset.type === bin.dataset.accept ? '#c8ffc8' : '#ffc8c8';
+    });
+
+    bin.addEventListener('dragleave', () => bin.style.background = '#e8e8e8');
+
+    bin.addEventListener('drop', () => {
+        const dragging = document.querySelector('.dragging');
+        if (dragging.dataset.type === bin.dataset.accept) {
+            bin.appendChild(dragging);
+            bin.style.background = '#c8ffc8';
+        } else {
+            alert('Fout bak!');
+            bin.style.background = '#ffc8c8';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
