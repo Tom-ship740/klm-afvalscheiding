@@ -10,10 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome voor iconen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         :root {
             --klm-blauw: #003082;
             --klm-lichtblauw: #00A1DE;
+            --klm-goud: #E6B800;
             --bak-blauw: #0077CC;
             --bak-geel: #E6B800;
             --bak-groen: #2E8B57;
@@ -134,6 +138,15 @@
             color: var(--wit);
             position: relative;
         }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, var(--lichtgrijs), transparent);
+        }
         .hero h1 {
             font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 800;
@@ -149,22 +162,49 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .hero .btn {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
 
         /* ──────────────── Sectie-headers ──────────────── */
         .section-header {
-            background: var(--klm-blauw);
+            background: linear-gradient(135deg, var(--klm-blauw), #002266);
             padding: 48px 24px;
             text-align: center;
             color: var(--wit);
+            position: relative;
+            overflow: hidden;
+        }
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 161, 222, 0.1);
+            border-radius: 50%;
         }
         .section-header h2 {
             font-size: clamp(1.6rem, 3vw, 2.2rem);
             font-weight: 700;
             letter-spacing: -0.01em;
+            position: relative;
         }
         .section-header p {
             opacity: 0.85;
             margin-top: 6px;
+            position: relative;
         }
 
         /* ──────────────── Content secties ──────────────── */
@@ -188,11 +228,27 @@
         }
         .card {
             background: var(--wit);
-            padding: 24px 20px;
+            padding: 28px 22px;
             border-radius: var(--radius);
             box-shadow: var(--schaduw);
             transition: var(--transition);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--klm-lichtblauw);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .card:hover::after {
+            opacity: 1;
         }
         .card:hover {
             box-shadow: var(--schaduw-hover);
@@ -230,6 +286,10 @@
         }
         .card.veiligheid {
             border-left: 6px solid #E91E63;
+        }
+        .card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
 
         /* ──────────────── Knoppen ──────────────── */
@@ -277,6 +337,13 @@
             font-size: 0.85rem;
             border-radius: 20px;
         }
+        .btn-success {
+            background: #4CAF50;
+            box-shadow: 0 4px 14px rgba(76, 175, 80, 0.3);
+        }
+        .btn-success:hover {
+            background: #388E3C;
+        }
         .btn-danger {
             background: #e74c3c;
             box-shadow: 0 4px 14px rgba(231, 76, 60, 0.3);
@@ -302,6 +369,9 @@
             margin-bottom: 12px;
             color: var(--klm-blauw);
             font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .draggable {
@@ -353,6 +423,9 @@
             text-decoration: line-through;
             text-decoration-color: #4CAF50;
         }
+        .draggable .item-icon {
+            font-size: 1.3rem;
+        }
 
         .bin {
             background: #f0f0f5;
@@ -365,6 +438,20 @@
             font-weight: 600;
             color: #555;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bin .bin-icon {
+            font-size: 1.5rem;
+        }
+        .bin .bin-count {
+            margin-left: auto;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
         .bin.highlight-good {
             background: #d4edda;
@@ -424,12 +511,22 @@
             font-weight: 600;
             min-height: 28px;
             transition: var(--transition);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--wit);
+            box-shadow: var(--schaduw);
         }
         .exercise-feedback.success {
             color: #2E7D32;
+            background: #e8f5e9;
         }
         .exercise-feedback.error {
             color: #C62828;
+            background: #fce4e4;
+        }
+        .exercise-feedback.info {
+            color: var(--klm-blauw);
+            background: #e8f4fd;
         }
 
         .exercise-actions {
@@ -448,6 +545,28 @@
             max-width: 700px;
             margin: 0 auto;
         }
+        .quiz-progress {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .quiz-progress .dot {
+            flex: 1;
+            height: 4px;
+            border-radius: 4px;
+            background: var(--grijs);
+            transition: var(--transition);
+        }
+        .quiz-progress .dot.active {
+            background: var(--klm-lichtblauw);
+        }
+        .quiz-progress .dot.correct {
+            background: #4CAF50;
+        }
+        .quiz-progress .dot.incorrect {
+            background: #e74c3c;
+        }
+
         .quiz-question {
             font-weight: 700;
             font-size: 1.2rem;
@@ -470,10 +589,30 @@
             background: var(--wit);
             text-align: left;
             font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .quiz-option:hover {
+        .quiz-option .letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--grijs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .quiz-option:hover:not(:disabled) {
             border-color: var(--klm-lichtblauw);
             background: #f8fbff;
+        }
+        .quiz-option:hover:not(:disabled) .letter {
+            background: var(--klm-lichtblauw);
+            color: var(--wit);
         }
         .quiz-option:focus-visible {
             outline: 3px solid var(--klm-lichtblauw);
@@ -485,10 +624,18 @@
             animation: pulse-green 0.5s ease;
             font-weight: 700;
         }
+        .quiz-option.correct .letter {
+            background: #4CAF50;
+            color: var(--wit);
+        }
         .quiz-option.incorrect {
             border-color: #e74c3c;
             background: #fce4e4;
             animation: shake 0.5s ease;
+        }
+        .quiz-option.incorrect .letter {
+            background: #e74c3c;
+            color: var(--wit);
         }
         .quiz-option:disabled {
             pointer-events: none;
@@ -511,17 +658,60 @@
 
         /* ──────────────── Footer ──────────────── */
         footer {
-            background: var(--klm-blauw);
+            background: linear-gradient(135deg, var(--klm-blauw), #001a4d);
             color: var(--wit);
             text-align: center;
-            padding: 28px 20px;
+            padding: 40px 20px 28px;
             font-size: 0.9rem;
             margin-top: 40px;
             letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+        }
+        footer::before {
+            content: '✈';
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 4rem;
+            opacity: 0.05;
+            transform: rotate(-20deg);
         }
         footer a {
             color: var(--klm-lichtblauw);
             text-decoration: none;
+            transition: var(--transition);
+        }
+        footer a:hover {
+            color: var(--wit);
+        }
+        footer .footer-quote {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+        }
+        footer .footer-quote::before {
+            content: '"';
+            font-size: 2rem;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: -20px;
+        }
+        footer .footer-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--klm-lichtblauw);
+            margin: 16px auto;
+            opacity: 0.3;
+        }
+        footer .footer-bottom {
+            opacity: 0.7;
+            font-size: 0.8rem;
         }
 
         /* ──────────────── Responsive ──────────────── */
@@ -558,6 +748,74 @@
             .quiz-container {
                 padding: 20px 16px;
             }
+            footer .footer-quote::before {
+                left: 0;
+            }
+        }
+
+        /* ──────────────── Toegevoegde animaties ──────────────── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        /* ──────────────── Tijdsbesparing indicator ──────────────── */
+        .time-saved {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: var(--wit);
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(76, 175, 80, 0.3);
+        }
+        .time-saved i {
+            font-size: 1.5rem;
+        }
+        .time-saved strong {
+            font-size: 1.2rem;
+        }
+
+        /* ──────────────── Tooltip ──────────────── */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+        .tooltip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--klm-blauw);
+            color: var(--wit);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: var(--schaduw);
+            z-index: 10;
         }
     </style>
 </head>
@@ -573,35 +831,45 @@
 
     <!-- Sticky navigatie -->
     <nav class="sticky-nav" aria-label="Cursus navigatie">
-        <a href="#home" data-section="home">🏠 Home</a>
-        <a href="#waarom" data-section="waarom">❓ Waarom</a>
-        <a href="#bakken" data-section="bakken">🗑️ Bakken</a>
-        <a href="#oefenen" data-section="oefenen">🎯 Oefenen</a>
-        <a href="#test" data-section="test">📝 Eindtest</a>
-        <a href="#bedankt" data-section="bedankt">✅ Klaar</a>
+        <a href="#home" data-section="home"><i class="fas fa-home"></i> Home</a>
+        <a href="#waarom" data-section="waarom"><i class="fas fa-question-circle"></i> Waarom</a>
+        <a href="#bakken" data-section="bakken"><i class="fas fa-trash-alt"></i> Bakken</a>
+        <a href="#oefenen" data-section="oefenen"><i class="fas fa-dragon"></i> Oefenen</a>
+        <a href="#test" data-section="test"><i class="fas fa-clipboard-check"></i> Eindtest</a>
+        <a href="#bedankt" data-section="bedankt"><i class="fas fa-check-circle"></i> Klaar</a>
     </nav>
 
     <!-- ────────── HOME ────────── -->
     <header class="hero" id="home">
-        <h1>Afvalscheiding voor KLM‑Monteurs</h1>
+        <h1>✈️ Afvalscheiding voor KLM‑Monteurs</h1>
         <p>In 5 minuten weet jij precies wat waar hoort. Duidelijk, praktisch en direct toepasbaar.</p>
-        <a class="btn" href="#waarom">Start de cursus ↓</a>
+        <a class="btn" href="#waarom"><i class="fas fa-arrow-right"></i> Start de cursus</a>
     </header>
 
     <section class="content-section" id="home-content">
+        <div class="time-saved fade-in">
+            <i class="fas fa-clock"></i>
+            <div>
+                <strong>Bespaar tijd en geld!</strong> 
+                <span style="opacity:0.9;">Goed scheiden bespaart KLM jaarlijks duizenden euro's aan afvalverwerking.</span>
+            </div>
+        </div>
         <h2>Wat ga je leren?</h2>
         <div class="grid">
-            <div class="card milieu">
-                <h3>🌍 Waarom afval scheiden?</h3>
-                <p>Ontdek het belang voor milieu, kosten en veiligheid.</p>
+            <div class="card milieu fade-in delay-1">
+                <div class="card-icon">🌍</div>
+                <h3>Waarom afval scheiden?</h3>
+                <p>Ontdek het belang voor milieu, kosten en veiligheid op de werkvloer.</p>
             </div>
-            <div class="card blue">
-                <h3>🗑️ De vier afvalbakken</h3>
+            <div class="card blue fade-in delay-2">
+                <div class="card-icon">🗑️</div>
+                <h3>De vier afvalbakken</h3>
                 <p>Leer welke bak waarvoor dient: blauw, geel, groen en rood.</p>
             </div>
-            <div class="card kosten">
-                <h3>🎯 Zelf oefenen</h3>
-                <p>Sleep afval naar de juiste bak en test je kennis.</p>
+            <div class="card kosten fade-in delay-3">
+                <div class="card-icon">🎯</div>
+                <h3>Zelf oefenen</h3>
+                <p>Sleep afval naar de juiste bak en test je kennis met de eindtest.</p>
             </div>
         </div>
     </section>
@@ -609,24 +877,27 @@
     <!-- ────────── WAAROM ────────── -->
     <div class="section-header" id="waarom">
         <h2>Waarom afval scheiden?</h2>
-        <p>Drie belangrijke redenen</p>
+        <p>Drie belangrijke redenen voor ons allemaal</p>
     </div>
     <section class="content-section">
         <div class="grid">
             <div class="card milieu">
-                <h3>🌍 Milieu</h3>
+                <div class="card-icon">🌍</div>
+                <h3>Milieu</h3>
                 <p>We verminderen restafval en dragen bij aan recycling. Gescheiden afval krijgt een tweede leven als grondstof.</p>
             </div>
             <div class="card kosten">
-                <h3>💰 Kosten</h3>
+                <div class="card-icon">💰</div>
+                <h3>Kosten</h3>
                 <p>Restafval verwerken is duur. Hoe beter wij scheiden, hoe lager de kosten voor KLM. Besparing die we kunnen investeren in vakmanschap.</p>
             </div>
             <div class="card veiligheid">
-                <h3>🦺 Veiligheid</h3>
+                <div class="card-icon">🦺</div>
+                <h3>Veiligheid</h3>
                 <p>Gevaarlijk afval zoals olie, batterijen of chemicaliën moet apart. Zo voorkomen we brand, lekkages en boetes.</p>
             </div>
         </div>
-        <a class="btn" href="#bakken">Volgende stap → De bakken</a>
+        <a class="btn" href="#bakken"><i class="fas fa-arrow-right"></i> Volgende stap: De bakken</a>
     </section>
 
     <!-- ────────── BAKKEN ────────── -->
@@ -637,277 +908,55 @@
     <section class="content-section">
         <div class="grid">
             <div class="card blue">
-                <h3>🔵 Blauw – Papier & Karton</h3>
+                <div class="card-icon">🔵</div>
+                <h3>Blauw – Papier & Karton</h3>
                 <p>Handdoekjes, kartonnen bekers, papier, verpakkingskarton. Schoon en droog aanleveren.</p>
             </div>
             <div class="card yellow">
-                <h3>🟡 Geel – Plastic & Blik</h3>
+                <div class="card-icon">🟡</div>
+                <h3>Geel – Plastic & Blik</h3>
                 <p>Plastic bekers, folie, lege flessen, blikjes. Geen piepschuim of volle verpakkingen.</p>
             </div>
             <div class="card green">
-                <h3>🟢 Groen – Organisch / GFT</h3>
+                <div class="card-icon">🟢</div>
+                <h3>Groen – Organisch / GFT</h3>
                 <p>Etensresten, appelklokhuizen, koffiedik, theezakjes. Geen vloeistoffen of verpakkingsmateriaal.</p>
             </div>
             <div class="card red">
-                <h3>🔴 Rood – Gevaarlijk afval</h3>
+                <div class="card-icon">🔴</div>
+                <h3>Rood – Gevaarlijk afval</h3>
                 <p>Olie, smeermiddelen, batterijen, verfresten, chemicaliën. Altijd in de speciale rode container.</p>
             </div>
         </div>
-        <a class="btn" href="#oefenen">Volgende stap → Oefenen</a>
+        <a class="btn" href="#oefenen"><i class="fas fa-arrow-right"></i> Volgende stap: Oefenen</a>
     </section>
 
     <!-- ────────── OEFENING ────────── -->
     <div class="section-header" id="oefenen">
-        <h2>Oefening: Sleep het afval naar de juiste bak</h2>
+        <h2>🎯 Oefening: Sleep het afval naar de juiste bak</h2>
         <p>Versleep elk item naar de bijbehorende bak</p>
     </div>
     <section class="content-section">
         <div class="exercise-wrapper" id="exerciseContainer">
             <!-- Items om te slepen -->
             <div class="items-panel">
-                <h3>📦 Afvalitems</h3>
+                <h3><i class="fas fa-boxes"></i> Afvalitems</h3>
                 <div id="itemsList">
                     <div class="draggable" draggable="true" data-type="papier" id="item-papier" aria-grabbed="false">
-                        📄 Papieren handdoek
+                        <span class="item-icon">📄</span> Papieren handdoek
                     </div>
                     <div class="draggable" draggable="true" data-type="plastic" id="item-plastic" aria-grabbed="false">
-                        🥤 Plastic beker
+                        <span class="item-icon">🥤</span> Plastic beker
                     </div>
                     <div class="draggable" draggable="true" data-type="organisch" id="item-organisch" aria-grabbed="false">
-                        🍎 Appelklokhuis
+                        <span class="item-icon">🍎</span> Appelklokhuis
                     </div>
                     <div class="draggable" draggable="true" data-type="gevaarlijk" id="item-gevaarlijk" aria-grabbed="false">
-                        🛢️ Oliefilter
+                        <span class="item-icon">🛢️</span> Oliefilter
                     </div>
                 </div>
-                <p class="exercise-feedback" id="exerciseFeedback" aria-live="polite"></p>
+                <div class="exercise-feedback" id="exerciseFeedback" aria-live="polite">
+                    <i class="fas fa-info-circle"></i> Sleep elk item naar de juiste bak
+                </div>
                 <div class="exercise-actions">
-                    <button class="btn btn-outline btn-small" id="resetExercise" type="button">🔄 Opnieuw proberen</button>
-                </div>
-            </div>
-
-            <!-- Doelbakken -->
-            <div class="bins-panel">
-                <h3>🗑️ Afvalbakken</h3>
-                <div class="bin blue" data-accept="papier" id="bin-papier" aria-label="Blauwe bak voor papier">
-                    🔵 Blauw – Papier
-                </div>
-                <div class="bin yellow" data-accept="plastic" id="bin-plastic" aria-label="Gele bak voor plastic">
-                    🟡 Geel – Plastic
-                </div>
-                <div class="bin green" data-accept="organisch" id="bin-organisch" aria-label="Groene bak voor organisch afval">
-                    🟢 Groen – Organisch
-                </div>
-                <div class="bin red" data-accept="gevaarlijk" id="bin-gevaarlijk" aria-label="Rode bak voor gevaarlijk afval">
-                    🔴 Rood – Gevaarlijk
-                </div>
-            </div>
-        </div>
-
-        <a class="btn" href="#test" style="margin-top: 20px;">Volgende stap → Eindtest</a>
-    </section>
-
-    <!-- ────────── EINDTEST ────────── -->
-    <div class="section-header" id="test">
-        <h2>Eindtest</h2>
-        <p>Test je kennis met deze quiz</p>
-    </div>
-    <section class="content-section">
-        <div class="quiz-container" id="quizContainer" aria-label="Quiz over afvalscheiding">
-            <p class="quiz-question" id="quizQuestion"></p>
-            <div class="quiz-options" id="quizOptions"></div>
-            <p class="quiz-score" id="quizScore" aria-live="polite"></p>
-            <div class="quiz-nav">
-                <button class="btn btn-outline btn-small" id="quizRetry" style="display:none;" type="button">🔄 Quiz opnieuw</button>
-            </div>
-        </div>
-        <div style="text-align:center; margin-top: 24px;">
-            <a class="btn" href="#bedankt">Afronden →</a>
-        </div>
-    </section>
-
-    <!-- ────────── BEDANKT ────────── -->
-    <div class="section-header" id="bedankt">
-        <h2>✅ Bedankt voor het volgen van de cursus!</h2>
-    </div>
-    <section class="content-section" style="text-align:center;">
-        <p style="font-size:1.1rem; max-width:600px; margin:0 auto 16px;">
-            Je hebt de basis van afvalscheiding onder de knie. Vanaf vandaag scheiden we het samen goed op de werkvloer.
-        </p>
-        <p style="color:var(--donkergrijs);">Bij twijfel? Kijk naar de kleur van de bak of vraag het aan je leidinggevende.</p>
-        <a class="btn" href="#home">🏠 Terug naar home</a>
-    </section>
-
-    <footer>
-        <!-- Warme quote -->
-        <div style="max-width:600px; margin:0 auto 16px; font-style:italic; color:rgba(255,255,255,0.9); font-size:1.1rem; line-height:1.7;">
-            “Samen scheiden we met liefde voor onze planeet. 
-            <br>Want wat we hier goed doen, dragen we overal mee naartoe.”
-        </div>
-        © 2026 KLM Afvalscheiding – Prototype &nbsp;|&nbsp;
-        <a href="#home">Terug naar boven ↑</a>
-    </footer>
-
-    <script>
-        (function() {
-            // ──────────────────────────────────────
-            // Voortgangsbalk & actieve navigatie
-            // ──────────────────────────────────────
-            const progressBar = document.getElementById('progressBar');
-            const navLinks = document.querySelectorAll('.sticky-nav a');
-            const sections = [];
-            // Verzamel alle sectie-ID's uit navigatielinks
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    const el = document.querySelector(href);
-                    if (el) sections.push({ id: href.substring(1), el, link });
-                }
-            });
-
-            function updateProgressAndNav() {
-                const scrollY = window.scrollY + 100; // offset
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = Math.min(100, Math.round((window.scrollY / docHeight) * 100));
-                progressBar.style.width = progress + '%';
-
-                // Bepaal actieve sectie
-                let activeId = sections.length > 0 ? sections[0].id : null;
-                sections.forEach(s => {
-                    const top = s.el.getBoundingClientRect().top + window.scrollY;
-                    if (scrollY >= top - 80) {
-                        activeId = s.id;
-                    }
-                });
-                // Update nav actieve klasse
-                navLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    const id = href ? href.substring(1) : '';
-                    if (id === activeId) {
-                        link.classList.add('nav-active');
-                    } else {
-                        link.classList.remove('nav-active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', updateProgressAndNav, { passive: true });
-            window.addEventListener('resize', updateProgressAndNav, { passive: true });
-            updateProgressAndNav();
-
-            // ──────────────────────────────────────
-            // Drag & Drop (muis + touch)
-            // ──────────────────────────────────────
-            const draggables = document.querySelectorAll('.draggable');
-            const bins = document.querySelectorAll('.bin');
-            const exerciseFeedback = document.getElementById('exerciseFeedback');
-            const resetBtn = document.getElementById('resetExercise');
-            const itemsList = document.getElementById('itemsList');
-            let correctCount = 0;
-            const totalItems = draggables.length;
-            let touchClone = null;
-            let touchStartX, touchStartY;
-            let currentTouchDrag = null;
-            let touchOffsetX = 0,
-                touchOffsetY = 0;
-
-            function updateFeedback() {
-                if (correctCount === totalItems) {
-                    exerciseFeedback.textContent = '🎉 Uitstekend! Alle items zijn correct gesorteerd!';
-                    exerciseFeedback.className = 'exercise-feedback success';
-                } else {
-                    exerciseFeedback.textContent = `✅ ${correctCount} van de ${totalItems} items goed geplaatst.`;
-                    exerciseFeedback.className = 'exercise-feedback';
-                }
-            }
-
-            function resetAllItems() {
-                // Verzamel alle draggable items (ook die in bins zitten)
-                const allItems = document.querySelectorAll('.draggable');
-                allItems.forEach(item => {
-                    item.classList.remove('placed', 'dragging', 'dragging-touch');
-                    item.setAttribute('draggable', 'true');
-                    item.setAttribute('aria-grabbed', 'false');
-                    item.style.textDecoration = '';
-                    item.style.opacity = '';
-                    item.style.pointerEvents = '';
-                    item.style.cursor = '';
-                    item.style.background = '';
-                    item.style.borderColor = '';
-                    item.style.position = '';
-                    item.style.zIndex = '';
-                    item.style.transform = '';
-                    item.style.maxWidth = '';
-                    // Verplaats terug naar itemsList
-                    itemsList.appendChild(item);
-                });
-                // Reset bins
-                bins.forEach(bin => {
-                    bin.style.background = '';
-                    bin.style.borderColor = '';
-                    bin.style.borderStyle = '';
-                    bin.classList.remove('highlight-good', 'highlight-bad');
-                });
-                correctCount = 0;
-                exerciseFeedback.textContent = '';
-                exerciseFeedback.className = 'exercise-feedback';
-                if (touchClone && touchClone.parentNode) {
-                    touchClone.parentNode.removeChild(touchClone);
-                }
-                touchClone = null;
-                currentTouchDrag = null;
-            }
-
-            resetBtn.addEventListener('click', resetAllItems);
-
-            // ─── Muis drag events ───
-            draggables.forEach(item => {
-                item.addEventListener('dragstart', function(e) {
-                    if (this.classList.contains('placed')) {
-                        e.preventDefault();
-                        return;
-                    }
-                    this.classList.add('dragging');
-                    this.setAttribute('aria-grabbed', 'true');
-                    e.dataTransfer.effectAllowed = 'move';
-                    e.dataTransfer.setData('text/plain', this.dataset.type);
-                });
-
-                item.addEventListener('dragend', function() {
-                    this.classList.remove('dragging');
-                    this.setAttribute('aria-grabbed', 'false');
-                    bins.forEach(b => {
-                        b.style.background = '';
-                        b.style.borderColor = '';
-                        b.style.borderStyle = '';
-                        b.classList.remove('highlight-good', 'highlight-bad');
-                    });
-                });
-            });
-
-            bins.forEach(bin => {
-                bin.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'move';
-                    const dragging = document.querySelector('.dragging');
-                    if (dragging && dragging.dataset.type === this.dataset.accept) {
-                        this.style.background = '#d4edda';
-                        this.style.borderColor = '#4CAF50';
-                        this.style.borderStyle = 'solid';
-                    } else {
-                        this.style.background = '#fce4e4';
-                        this.style.borderColor = '#e74c3c';
-                        this.style.borderStyle = 'solid';
-                    }
-                });
-
-                bin.addEventListener('dragleave', function() {
-                    this.style.background = '';
-                    this.style.borderColor = '';
-                    this.style.borderStyle = '';
-                    this.classList.remove('highlight-good', 'highlight-bad');
-                });
-
-                bin.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    this.style
+                    <button class="btn btn-outline btn-small" id="
